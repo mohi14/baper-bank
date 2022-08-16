@@ -7,7 +7,7 @@ document.getElementById('submit-btn').addEventListener('click', function () {
     const userPassword = passwordFiedl.value;
 
     if (userEmail === 'shontan@baap.com' && userPassword === 'secret') {
-        alert('log in');
+        window.location.href = 'bank.html';
     }
     else {
         alert('invalid user');

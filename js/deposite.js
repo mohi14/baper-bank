@@ -30,3 +30,12 @@ document.getElementById('deposite-btn').addEventListener('click', function () {
 })
 
 
+/* --------------------------
+Log out
+-----------------------------*/
+
+document.getElementById('log-out-btn').addEventListener('click', function () {
+    window.location.href = 'index.html';
+})
+
+

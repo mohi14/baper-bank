@@ -8,13 +8,18 @@ document.getElementById('withdraw-btn').addEventListener('click', function () {
 
     const totalWithdrawAmount = parseFloat(newWithdrawAmount) + parseFloat(previousWithdrawAmount);
 
-    withdraw.innerText = totalWithdrawAmount;
-
     const balance = document.getElementById('balance');
     const previouseTotalBalace = balance.innerText;
 
     const newTotalBalance = parseFloat(previouseTotalBalace) - parseFloat(newWithdrawAmount);
-    balance.innerHTML = newTotalBalance;
+
+    if (parseFloat(newTotalBalance) < 0) {
+        alert('insufficient balance')
+    }
+    else {
+        withdraw.innerText = totalWithdrawAmount;
+        balance.innerHTML = newTotalBalance;
+    }
 
     withdrawField.value = '';
 })

@@ -1,31 +1,38 @@
 document.getElementById('withdraw-btn').addEventListener('click', function () {
 
     const withdrawField = document.getElementById('withdraw');
-    const newWithdrawAmount = withdrawField.value;
+    const newWithdrawAmountString = withdrawField.value;
+    const newWithdrawAmount = parseFloat(newWithdrawAmountString);
+    withdrawField.value = '';
 
-    if (parseFloat(newWithdrawAmount) < 0) {
-        alert('Please enter positive amount');
+    if (isNaN(newWithdrawAmount)) {
+        alert('Enter valid input');
+        return;
     }
 
-    else {
-        const withdraw = document.getElementById('withdraw-amount');
-        const previousWithdrawAmount = withdraw.innerText;
+    const withdraw = document.getElementById('withdraw-amount');
+    const previousWithdrawAmountString = withdraw.innerText;
+    const previousDepositeAmount = parseFloat(previousWithdrawAmountString);
 
-        const totalWithdrawAmount = parseFloat(newWithdrawAmount) + parseFloat(previousWithdrawAmount);
+    const balance = document.getElementById('balance');
+    const previouseTotalBalaceString = balance.innerText;
+    const previouseTotalBalace = parseFloat(previouseTotalBalaceString)
 
-        const balance = document.getElementById('balance');
-        const previouseTotalBalace = balance.innerText;
-
-        const newTotalBalance = parseFloat(previouseTotalBalace) - parseFloat(newWithdrawAmount);
-
-        if (parseFloat(newTotalBalance) < 0) {
-            alert('insufficient balance')
-        }
-        else {
-            withdraw.innerText = totalWithdrawAmount;
-            balance.innerHTML = newTotalBalance;
-        }
-
-        withdrawField.value = '';
+    if (newWithdrawAmount > previouseTotalBalace) {
+        alert('Insufficient Balance')
+        return;
     }
+
+    if (newWithdrawAmount < 0) {
+        alert('Enter positive amount')
+        return;
+    }
+
+
+    const totalWithdrawAmount = newWithdrawAmount + previousDepositeAmount;
+    withdraw.innerText = totalWithdrawAmount;
+
+    const newTotalBalance = previouseTotalBalace - newWithdrawAmount;
+    balance.innerHTML = newTotalBalance;
+
 })

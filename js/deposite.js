@@ -1,27 +1,32 @@
 
 document.getElementById('deposite-btn').addEventListener('click', function () {
     const depositeField = document.getElementById('deposite');
-    const newDepositeAmount = depositeField.value;
+    const newDepositeAmountString = depositeField.value;
+    const newDepositeAmount = parseFloat(newDepositeAmountString);
+    depositeField.value = '';
 
-    if (parseFloat(newDepositeAmount) < 0) {
-        alert('Please enter positive amount');
+    if (isNaN(newDepositeAmount)) {
+        alert('Enters valid Input');
+        return;
     }
-
-    else {
-        const amountText = document.getElementById('deposite-amount');
-        const previousDepositeAmount = amountText.innerText;
-
-        const currentDepositeAmount = parseFloat(newDepositeAmount) + parseFloat(previousDepositeAmount);
-        amountText.innerText = currentDepositeAmount;
-
-        const balance = document.getElementById('balance');
-        const previouseTotalBalace = balance.innerText;
-
-        const newTotalBalance = parseFloat(previouseTotalBalace) + parseFloat(newDepositeAmount);
-        balance.innerHTML = newTotalBalance;
-
-        depositeField.value = '';
+    if (newDepositeAmount < 0) {
+        alert('Enter positive amount');
+        return;
     }
+    const amountText = document.getElementById('deposite-amount');
+    const previousDepositeAmountString = amountText.innerText;
+    const previousDepositeAmount = parseFloat(previousDepositeAmountString);
+
+
+    const balance = document.getElementById('balance');
+    const previouseTotalBalaceString = balance.innerText;
+    const previouseTotalBalace = parseFloat(previouseTotalBalaceString);
+
+    const currentDepositeAmount = newDepositeAmount + previousDepositeAmount;
+    amountText.innerText = currentDepositeAmount;
+
+    const newTotalBalance = previouseTotalBalace + newDepositeAmount;
+    balance.innerHTML = newTotalBalance;
 })
 
 

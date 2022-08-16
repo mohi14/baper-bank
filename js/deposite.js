@@ -3,17 +3,25 @@ document.getElementById('deposite-btn').addEventListener('click', function () {
     const depositeField = document.getElementById('deposite');
     const newDepositeAmount = depositeField.value;
 
-    const amountText = document.getElementById('deposite-amount');
-    const previousDepositeAmount = amountText.innerText;
+    if (parseFloat(newDepositeAmount) < 0) {
+        alert('Please enter positive amount');
+    }
 
-    const currentDepositeAmount = parseFloat(newDepositeAmount) + parseFloat(previousDepositeAmount);
-    amountText.innerText = currentDepositeAmount;
+    else {
+        const amountText = document.getElementById('deposite-amount');
+        const previousDepositeAmount = amountText.innerText;
 
-    const balance = document.getElementById('balance');
-    const previouseTotalBalace = balance.innerText;
+        const currentDepositeAmount = parseFloat(newDepositeAmount) + parseFloat(previousDepositeAmount);
+        amountText.innerText = currentDepositeAmount;
 
-    const newTotalBalance = parseFloat(previouseTotalBalace) + parseFloat(newDepositeAmount);
-    balance.innerHTML = newTotalBalance;
+        const balance = document.getElementById('balance');
+        const previouseTotalBalace = balance.innerText;
 
-    depositeField.value = '';
+        const newTotalBalance = parseFloat(previouseTotalBalace) + parseFloat(newDepositeAmount);
+        balance.innerHTML = newTotalBalance;
+
+        depositeField.value = '';
+    }
 })
+
+
